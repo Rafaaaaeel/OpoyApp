@@ -14,6 +14,9 @@ class RegisterViewController: UIViewController{
     let createAccountTitlelabel = UILabel()
     let createNewAccountSubTitle = UILabel()
     let registerView = RegisterView()
+    let createAccountButton = UIButton(type: .system)
+    let alreadyAccountLabel = UILabel()
+    let returnToLoginScreen = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +46,13 @@ extension RegisterViewController{
         createNewAccountSubTitle.textColor = .systemGray
         createNewAccountSubTitle.text = "Create a new account"
         
+        createAccountButton.translatesAutoresizingMaskIntoConstraints = false
+        createAccountButton.tintColor = appColor
+        createAccountButton.configuration = .filled()
+        createAccountButton.setTitle("CREATE ACCOUNT", for: [])
+        //createAccountTitlelabel.addTarget(self, action: #selector(loginButtonPressed), for: .primaryActionTriggered)
+        createAccountButton.configuration?.imagePadding = 8
+        
         
     }
     
@@ -50,6 +60,8 @@ extension RegisterViewController{
         view.addSubview(createAccountTitlelabel)
         view.addSubview(createNewAccountSubTitle)
         view.addSubview(registerView)
+        view.addSubview(createAccountButton)
+
         
         NSLayoutConstraint.activate([
             createAccountTitlelabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 6),
@@ -61,8 +73,11 @@ extension RegisterViewController{
         NSLayoutConstraint.activate([
             registerView.topAnchor.constraint(equalToSystemSpacingBelow: createAccountTitlelabel.bottomAnchor, multiplier: 6),
             registerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            registerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             registerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            createAccountButton.bottomAnchor.constraint(equalToSystemSpacingBelow: registerView.topAnchor, multiplier: 3)
         ])
     }
 }

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         loginViewController.delegate = self
         
-        window?.rootViewController = registerViewController
+        window?.rootViewController = loginViewController
         
         return true
     }

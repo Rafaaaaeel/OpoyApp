@@ -34,7 +34,7 @@ extension RegisterView{
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 50
+        stackView.spacing = 70
         stackView.backgroundColor = .cyan
         
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
