@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     let welcomeMessageLabel = UILabel()
     let moveOnMessageLabel = UILabel()
     let emailView = LoginView(imageName: "envelope.fill", placeholder: "   @email.com", text: "Email", isSecurity: false)
-    let passwordView = LoginView(imageName: "lock.fill", placeholder: "   Password", text: "", isSecurity: true)
+    let passwordView = LoginView(imageName: "r.fill", placeholder: "   Password", text: "", isSecurity: true)
     let errorMessage = UILabel()
     let forgotPasswordButton = UIButton(type: .system)
     let createAccoutLabel = UILabel()
