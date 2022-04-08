@@ -8,6 +8,13 @@
 import Foundation
 import UIKit
 
+protocol RegisterViewControllerDelegate: AnyObject{
+    func didCreateAccount()
+    
+    func didAlreadyHasAccount()
+}
+
+
 class RegisterViewController: UIViewController{
     
     let image = UIImageView(image: UIImage(systemName: "arrow", withConfiguration: UIImage.SymbolConfiguration(scale: .large)))
@@ -17,6 +24,30 @@ class RegisterViewController: UIViewController{
     let createAccountButton = UIButton(type: .system)
     let alreadyAccountLabel = UILabel()
     let returnToLoginScreen = UIButton(type: .system)
+    let arrowToReturn = UIButton(type: .system)
+    
+    weak var delegate: RegisterViewControllerDelegate?
+    
+    
+    var name: String?{
+        return registerView.nameTextField.text
+    }
+    
+    var email: String?{
+        return registerView.emailTextField.text
+    }
+    
+    var phone: String?{
+        return registerView.phoneNumberTextField.text
+    }
+    
+    var password: String?{
+        return registerView.passwordTextField.text
+    }
+    
+    var passwordConfirmation: String?{
+        return registerView.passwordConfirmationTextField.text
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +65,6 @@ extension RegisterViewController{
 
         registerView.translatesAutoresizingMaskIntoConstraints = false
         
-        
         createAccountTitlelabel.translatesAutoresizingMaskIntoConstraints = false
         createAccountTitlelabel.textAlignment = .center
         createAccountTitlelabel.font = UIFont.boldSystemFont(ofSize: 32)
@@ -50,7 +80,7 @@ extension RegisterViewController{
         createAccountButton.tintColor = appColor
         createAccountButton.configuration = .filled()
         createAccountButton.setTitle("CREATE ACCOUNT", for: [])
-        //createAccountTitlelabel.addTarget(self, action: #selector(loginButtonPressed), for: .primaryActionTriggered)
+        createAccountButton.addTarget(self, action: #selector(createNewAccount), for: .primaryActionTriggered)
         createAccountButton.configuration?.imagePadding = 8
         
         alreadyAccountLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +90,7 @@ extension RegisterViewController{
         returnToLoginScreen.translatesAutoresizingMaskIntoConstraints = false
         returnToLoginScreen.tintColor = appColor
         returnToLoginScreen.setTitle("Login", for: [])
+        returnToLoginScreen.addTarget(self, action: #selector(alreadyHasAccount), for: .primaryActionTriggered)
         
     }
     
@@ -102,4 +133,35 @@ extension RegisterViewController{
             
         ])
     }
+}
+
+extension RegisterViewController{
+    @objc func alreadyHasAccount(){
+        delegate?.didAlreadyHasAccount()
+    }
+    
+    @objc func createNewAccount(){
+        
+        delegate?.didCreateAccount()
+        verifyFields()
+    }
+    private func verifyFields(){
+        
+        guard let name = name, let email = email, let phone = phone, let password = password,let passwordConfirmation = passwordConfirmation else { return }
+        
+        if name.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty || passwordConfirmation.isEmpty{
+            print("Cannot be blank")
+        }
+        
+        if password != passwordConfirmation{
+            print("They are not the same")
+        }
+        
+        if !email.contains("@"){
+            print("Email formation wrong")
+        }
+        
+    }
+    
+    
 }

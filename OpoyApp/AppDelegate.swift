@@ -24,8 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .systemBackground
 
         loginViewController.delegate = self
+        registerViewController.delegate = self
         
-        window?.rootViewController = registerViewController
+        window?.rootViewController = loginViewController
         
         return true
     }
@@ -50,12 +51,20 @@ extension AppDelegate: LoginViewControllerDelegate{
     
     
     func didLogin() {
-        //window?.rootViewController = LoginViewController
-        print("foo - login")
+        //
     }
     
     func didCreateAnotherAccount() {
         setRootViewController(registerViewController)
-        print("foo - create a new account")
+    }
+}
+
+extension AppDelegate: RegisterViewControllerDelegate{
+    func didCreateAccount(){
+        print("Creating account")
+    }
+    
+    func didAlreadyHasAccount(){
+        setRootViewController(loginViewController)
     }
 }

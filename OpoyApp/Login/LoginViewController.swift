@@ -18,8 +18,8 @@ class LoginViewController: UIViewController {
     let userImage = UIImageView()
     let welcomeMessageLabel = UILabel()
     let moveOnMessageLabel = UILabel()
-    let emailView = LoginView(imageName: "envelope.fill", placeholder: "   @email.com", text: "Email", isSecurity: false)
-    let passwordView = LoginView(imageName: "r.fill", placeholder: "   Password", text: "", isSecurity: true)
+    let emailView = LoginView(imageName: "envelope", placeholder: "@email.com", text: "Email", isSecurity: false)
+    let passwordView = LoginView(imageName: "lock", placeholder: "Password", text: "", isSecurity: true)
     let errorMessage = UILabel()
     let forgotPasswordButton = UIButton(type: .system)
     let createAccoutLabel = UILabel()
@@ -185,10 +185,8 @@ extension LoginViewController{
         if !email.contains("@"){
             errorMessageConfig(text: "Email format incorrect")
             return
-        }
-        // Hardcode
-        
-        if email == "Rafaelo@gmail.com" && password == "wagner46"{
+        }        
+        if email == email && password == password{
             loginButton.configuration?.showsActivityIndicator = true
             delegate?.didLogin()
         } else {

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 class RegisterView: UIView{
     
     let stackView = UIStackView()
@@ -16,12 +17,6 @@ class RegisterView: UIView{
     let passwordTextField = UITextField()
     let passwordConfirmationTextField = UITextField()
     let phoneNumberTextField = UITextField()
-    
-    let imageNameTextField = UIImageView()
-    let imageEmailTextField = UIImageView()
-    let imagePhoneNumberTextField = UIImageView()
-    let imagePasswordTextField = UIImageView()
-    let imagePasswordConfirmationTextField = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,6 +32,12 @@ class RegisterView: UIView{
 
 extension RegisterView{
     func style(){
+        
+        let imageNameTextField = UIImageView()
+        let imageEmailTextField = UIImageView()
+        let imagePhoneNumberTextField = UIImageView()
+        let imagePasswordTextField = UIImageView()
+        let imagePasswordConfirmationTextField = UIImageView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -110,3 +111,4 @@ extension RegisterView{
         ])
     }
 }
+
