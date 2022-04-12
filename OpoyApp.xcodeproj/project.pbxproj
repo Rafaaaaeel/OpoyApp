@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270A390D2805817100A88E51 /* ResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A390C2805817100A88E51 /* ResetPasswordController.swift */; };
+		270A390F280581BF00A88E51 /* ResetPasword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A390E280581BF00A88E51 /* ResetPasword.swift */; };
+		2727D28F28007052005D0265 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2727D28E28007052005D0265 /* UserModel.swift */; };
 		277EC63927DF6D6400638066 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EC63827DF6D6400638066 /* AppDelegate.swift */; };
 		277EC63D27DF6D6400638066 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EC63C27DF6D6400638066 /* LoginViewController.swift */; };
 		277EC64227DF6D6500638066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 277EC64127DF6D6500638066 /* Assets.xcassets */; };
@@ -14,9 +17,13 @@
 		277EC64F27DF736000638066 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EC64E27DF736000638066 /* LoginView.swift */; };
 		2781C2CE27E9CFC400386DF4 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781C2CD27E9CFC400386DF4 /* RegisterView.swift */; };
 		2781C2D127E9D16300386DF4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781C2D027E9D16300386DF4 /* RegisterViewController.swift */; };
+		27BE30D92804CA540059973E /* MainControllerPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BE30D82804CA540059973E /* MainControllerPageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		270A390C2805817100A88E51 /* ResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
+		270A390E280581BF00A88E51 /* ResetPasword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasword.swift; sourceTree = "<group>"; };
+		2727D28E28007052005D0265 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		277EC63527DF6D6400638066 /* OpoyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpoyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		277EC63827DF6D6400638066 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		277EC63C27DF6D6400638066 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -26,6 +33,7 @@
 		277EC64E27DF736000638066 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2781C2CD27E9CFC400386DF4 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		2781C2D027E9D16300386DF4 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		27BE30D82804CA540059973E /* MainControllerPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllerPageController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +47,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2727D28C2800702D005D0265 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2727D28E28007052005D0265 /* UserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2727D28D28007033005D0265 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				27BE30D72804CA290059973E /* Main */,
+				2781C2CF27E9D0F200386DF4 /* Register */,
+				277EC64D27DF72EB00638066 /* Login */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		277EC62C27DF6D6400638066 = {
 			isa = PBXGroup;
 			children = (
@@ -58,8 +84,8 @@
 		277EC63727DF6D6400638066 /* OpoyApp */ = {
 			isa = PBXGroup;
 			children = (
-				2781C2CF27E9D0F200386DF4 /* Register */,
-				277EC64D27DF72EB00638066 /* Login */,
+				2727D28D28007033005D0265 /* View */,
+				2727D28C2800702D005D0265 /* Model */,
 				277EC64C27DF6D7400638066 /* Files */,
 				277EC63827DF6D6400638066 /* AppDelegate.swift */,
 			);
@@ -81,6 +107,8 @@
 			children = (
 				277EC63C27DF6D6400638066 /* LoginViewController.swift */,
 				277EC64E27DF736000638066 /* LoginView.swift */,
+				270A390C2805817100A88E51 /* ResetPasswordController.swift */,
+				270A390E280581BF00A88E51 /* ResetPasword.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -92,6 +120,14 @@
 				2781C2D027E9D16300386DF4 /* RegisterViewController.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		27BE30D72804CA290059973E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				27BE30D82804CA540059973E /* MainControllerPageController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,8 +202,12 @@
 			files = (
 				277EC64F27DF736000638066 /* LoginView.swift in Sources */,
 				2781C2D127E9D16300386DF4 /* RegisterViewController.swift in Sources */,
+				27BE30D92804CA540059973E /* MainControllerPageController.swift in Sources */,
+				270A390F280581BF00A88E51 /* ResetPasword.swift in Sources */,
 				2781C2CE27E9CFC400386DF4 /* RegisterView.swift in Sources */,
+				270A390D2805817100A88E51 /* ResetPasswordController.swift in Sources */,
 				277EC63D27DF6D6400638066 /* LoginViewController.swift in Sources */,
+				2727D28F28007052005D0265 /* UserModel.swift in Sources */,
 				277EC63927DF6D6400638066 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,8 +10,6 @@ import UIKit
 
 protocol RegisterViewControllerDelegate: AnyObject{
     func didCreateAccount()
-    
-    func didAlreadyHasAccount()
 }
 
 
@@ -25,6 +23,9 @@ class RegisterViewController: UIViewController{
     let alreadyAccountLabel = UILabel()
     let returnToLoginScreen = UIButton(type: .system)
     let arrowToReturn = UIButton(type: .system)
+    
+    var users: [User] = []
+    
     
     weak var delegate: RegisterViewControllerDelegate?
     
@@ -62,7 +63,10 @@ class RegisterViewController: UIViewController{
 extension RegisterViewController{
     
     func style(){
-
+        
+        navigationItem.hidesBackButton = true
+        
+        view.backgroundColor = .systemBackground
         registerView.translatesAutoresizingMaskIntoConstraints = false
         
         createAccountTitlelabel.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +107,7 @@ extension RegisterViewController{
         view.addSubview(returnToLoginScreen)
         
         NSLayoutConstraint.activate([
-            createAccountTitlelabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 8),
+            createAccountTitlelabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
             createAccountTitlelabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             createNewAccountSubTitle.topAnchor.constraint(equalToSystemSpacingBelow: createAccountTitlelabel.bottomAnchor, multiplier: 2),
@@ -136,32 +140,27 @@ extension RegisterViewController{
 }
 
 extension RegisterViewController{
-    @objc func alreadyHasAccount(){
-        delegate?.didAlreadyHasAccount()
+    @objc func alreadyHasAccount(_ sender: UIButton){
+        navigationController?.popViewController(animated: true)
     }
     
-    @objc func createNewAccount(){
-        
+    @objc func createNewAccount(_ sender: UIButton){
         delegate?.didCreateAccount()
-        verifyFields()
+        registerUser()
+        print(users)
     }
-    private func verifyFields(){
+    private func registerUser(){
+        guard let name = name, let email = email, let phone = phone, let password = password, let _ = passwordConfirmation else { return }
         
-        guard let name = name, let email = email, let phone = phone, let password = password,let passwordConfirmation = passwordConfirmation else { return }
+        let user1 = User(name: name, email: email, phone: phone, password: password)
         
-        if name.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty || passwordConfirmation.isEmpty{
-            print("Cannot be blank")
-        }
+        navigationController?.popViewController(animated: true)
         
-        if password != passwordConfirmation{
-            print("They are not the same")
-        }
+        users.append(user1)
         
-        if !email.contains("@"){
-            print("Email formation wrong")
-        }
         
     }
-    
-    
+
 }
+
+

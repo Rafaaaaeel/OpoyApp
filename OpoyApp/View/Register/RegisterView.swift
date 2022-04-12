@@ -18,6 +18,8 @@ class RegisterView: UIView{
     let passwordConfirmationTextField = UITextField()
     let phoneNumberTextField = UITextField()
     
+    let userDefaulst = UserDefaults()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -68,23 +70,27 @@ extension RegisterView{
         nameTextField.placeholder = "Name"
         nameTextField.leftView = imageNameTextField
         nameTextField.leftViewMode = .always
+        nameTextField.delegate = self
         
         
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.placeholder = "Email"
         emailTextField.leftView = imageEmailTextField
         emailTextField.leftViewMode = .always
+        emailTextField.delegate = self
         
         phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = false
         phoneNumberTextField.placeholder = "Phone"
         phoneNumberTextField.leftView = imagePhoneNumberTextField
         phoneNumberTextField.leftViewMode = .always
+        phoneNumberTextField.delegate = self
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true
         passwordTextField.leftView = imagePasswordTextField
         passwordTextField.leftViewMode = .always
+        passwordTextField.delegate = self
         
         passwordConfirmationTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordConfirmationTextField.placeholder = "Confirm password"
@@ -112,3 +118,13 @@ extension RegisterView{
     }
 }
 
+extension RegisterView: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+}

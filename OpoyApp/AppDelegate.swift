@@ -14,9 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     var window: UIWindow?
-    let loginViewController = LoginViewController()
+    let resetViewController = ResetPasswordController()
     let registerViewController = RegisterViewController()
+    let loginViewController = LoginViewController()
+    let mainPageViewController = MainControllerPageController()
+    let validationViewController =  ValidationViewController()
     
+    let navigationController = UINavigationController(rootViewController: LoginViewController())
     func application(_ application: UIApplication, didFinishLaunchingWithOptions lauchoptions: [UIApplication.LaunchOptionsKey : Any]?) -> Bool{
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -26,7 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loginViewController.delegate = self
         registerViewController.delegate = self
         
-        window?.rootViewController = loginViewController
+        
+        window?.rootViewController = navigationController
+        //window?.rootViewController = ResetViewController
         
         return true
     }
@@ -51,20 +57,15 @@ extension AppDelegate: LoginViewControllerDelegate{
     
     
     func didLogin() {
-        //
+        setRootViewController(mainPageViewController)
     }
     
-    func didCreateAnotherAccount() {
-        setRootViewController(registerViewController)
-    }
 }
 
 extension AppDelegate: RegisterViewControllerDelegate{
     func didCreateAccount(){
-        print("Creating account")
-    }
-    
-    func didAlreadyHasAccount(){
         setRootViewController(loginViewController)
     }
 }
+
+

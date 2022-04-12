@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol LoginViewControllerDelegate: AnyObject{
-    func didCreateAnotherAccount()
-    
+protocol LoginViewControllerDelegate: AnyObject{    
     func didLogin()
 }
 
@@ -25,6 +23,7 @@ class LoginViewController: UIViewController {
     let createAccoutLabel = UILabel()
     let createAccoutButton = UIButton(type: .system)
     let loginButton = UIButton(type: .system)
+    
     
     weak var delegate: LoginViewControllerDelegate?
     
@@ -48,6 +47,9 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController{
     private func style(){
+        
+        view.backgroundColor = .systemBackground
+        
         emailView.translatesAutoresizingMaskIntoConstraints = false
         
         welcomeMessageLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -73,6 +75,7 @@ extension LoginViewController{
         forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
         forgotPasswordButton.setTitle("Forgot Password?", for: [])
         forgotPasswordButton.tintColor = appColor
+        forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordPressed), for: .primaryActionTriggered)
         
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.tintColor = appColor
@@ -169,7 +172,11 @@ extension LoginViewController{
     }
     
     @objc func createNewAccountPressed(_ sender: UIButton){
-        delegate?.didCreateAnotherAccount()
+        navigationController?.pushViewController(RegisterViewController(), animated: true)
+    }
+    
+    @objc func forgotPasswordPressed(_ sender: UIButton){
+        navigationController?.present(UINavigationController(rootViewController: ResetPasswordController()), animated: true, completion: nil)
     }
     private func login(){
         loginVerification()
@@ -177,21 +184,9 @@ extension LoginViewController{
     
     private func loginVerification(){
         guard let email = email, let password = password else { return }
-        
-        if email.isEmpty || password.isEmpty{
-            errorMessageConfig(text: "Email / Password Cannot be blank")
-            return
-        }
-        if !email.contains("@"){
-            errorMessageConfig(text: "Email format incorrect")
-            return
-        }        
-        if email == email && password == password{
-            loginButton.configuration?.showsActivityIndicator = true
-            delegate?.didLogin()
-        } else {
-            errorMessageConfig(text: "Email / Password incorrect")
-        }
+
+        print(email, password)
+        delegate?.didLogin()
         
     }
     private func errorMessageConfig(text: String){
