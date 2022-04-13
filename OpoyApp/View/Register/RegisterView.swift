@@ -163,6 +163,6 @@ extension RegisterView: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let name = nameTextField.text, le
+        //guard let name = nameTextField.text, let
     }
 }
