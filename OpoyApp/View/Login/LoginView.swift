@@ -20,6 +20,7 @@ class LoginView: UIView{
     let placeholder : String
     let text: String
     let isSec: Bool
+    var borderWidth: CGFloat = 0
     
     init(imageName: String, placeholder: String, text: String, isSecurity: Bool){
         self.imageName = imageName
@@ -64,11 +65,14 @@ extension LoginView{
         textField.isSecureTextEntry = isSec
         textField.leftView = image
         textField.leftViewMode = .always
-        textField.textColor = appColor
+        //textField.textColor = appColor
         textField.textAlignment = .left
-        
-        layer.cornerRadius = 10
+
+        layer.cornerRadius = 15
         clipsToBounds = true
+        
+        layer.borderWidth = borderWidth
+        layer.borderColor = UIColor(red:255/255, green:1/255, blue:1/255, alpha: 0.6).cgColor
         
     }
     

@@ -15,7 +15,7 @@ protocol RegisterViewControllerDelegate: AnyObject{
 
 class RegisterViewController: UIViewController{
     
-    let image = UIImageView(image: UIImage(systemName: "arrow", withConfiguration: UIImage.SymbolConfiguration(scale: .large)))
+
     let createAccountTitlelabel = UILabel()
     let createNewAccountSubTitle = UILabel()
     let registerView = RegisterView()
@@ -86,6 +86,7 @@ extension RegisterViewController{
         createAccountButton.setTitle("CREATE ACCOUNT", for: [])
         createAccountButton.addTarget(self, action: #selector(createNewAccount), for: .primaryActionTriggered)
         createAccountButton.configuration?.imagePadding = 8
+        createAccountButton.isEnabled = false
         
         alreadyAccountLabel.translatesAutoresizingMaskIntoConstraints = false
         alreadyAccountLabel.text = "Already have a account?"
@@ -146,21 +147,19 @@ extension RegisterViewController{
     
     @objc func createNewAccount(_ sender: UIButton){
         delegate?.didCreateAccount()
-        registerUser()
-        print(users)
     }
-    private func registerUser(){
-        guard let name = name, let email = email, let phone = phone, let password = password, let _ = passwordConfirmation else { return }
-        
-        let user1 = User(name: name, email: email, phone: phone, password: password)
-        
-        navigationController?.popViewController(animated: true)
-        
-        users.append(user1)
-        
+    private func register(){
         
     }
-
+    
+    private func registerVerification(){
+        // least one uppercase,
+        // least one digit
+        // least one lowercase
+        // least one symbol
+        //  min 8 characters total
+    }
+    
 }
 
 

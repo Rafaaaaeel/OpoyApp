@@ -14,9 +14,18 @@ class RegisterView: UIView{
     let stackView = UIStackView()
     let nameTextField = UITextField()
     let emailTextField = UITextField()
+    let phoneNumberTextField = UITextField()
     let passwordTextField = UITextField()
     let passwordConfirmationTextField = UITextField()
-    let phoneNumberTextField = UITextField()
+    
+    
+    let nameError = UILabel()
+    let emailError = UILabel()
+    let phoneError = UILabel()
+    let passwordError = UILabel()
+    let confirmPasswordError = UILabel()
+    
+    let turnOnAnOff = true
     
     let userDefaulst = UserDefaults()
     
@@ -43,7 +52,7 @@ extension RegisterView{
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 70
+        stackView.spacing = 60
         
         imageNameTextField.translatesAutoresizingMaskIntoConstraints = false
         imageNameTextField.tintColor = appColor
@@ -72,6 +81,10 @@ extension RegisterView{
         nameTextField.leftViewMode = .always
         nameTextField.delegate = self
         
+        nameError.translatesAutoresizingMaskIntoConstraints = false
+        nameError.text = "Required"
+        nameError.textColor = .systemRed
+        nameError.isHidden = turnOnAnOff
         
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.placeholder = "Email"
@@ -79,11 +92,21 @@ extension RegisterView{
         emailTextField.leftViewMode = .always
         emailTextField.delegate = self
         
+        emailError.translatesAutoresizingMaskIntoConstraints = false
+        emailError.text = "Required"
+        emailError.textColor = .systemRed
+        emailError.isHidden = turnOnAnOff
+        
         phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = false
         phoneNumberTextField.placeholder = "Phone"
         phoneNumberTextField.leftView = imagePhoneNumberTextField
         phoneNumberTextField.leftViewMode = .always
         phoneNumberTextField.delegate = self
+        
+        phoneError.translatesAutoresizingMaskIntoConstraints = false
+        phoneError.text = "Required"
+        phoneError.textColor = .systemRed
+        phoneError.isHidden = turnOnAnOff
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "Password"
@@ -92,20 +115,35 @@ extension RegisterView{
         passwordTextField.leftViewMode = .always
         passwordTextField.delegate = self
         
+        passwordError.translatesAutoresizingMaskIntoConstraints = false
+        passwordError.text = "Required"
+        passwordError.textColor = .systemRed
+        passwordError.isHidden = turnOnAnOff
+        
         passwordConfirmationTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordConfirmationTextField.placeholder = "Confirm password"
         passwordConfirmationTextField.isSecureTextEntry = true
         passwordConfirmationTextField.leftView = imagePasswordConfirmationTextField
         passwordConfirmationTextField.leftViewMode = .always
+        
+        confirmPasswordError.translatesAutoresizingMaskIntoConstraints = false
+        confirmPasswordError.text = "Required"
+        confirmPasswordError.textColor = .systemRed
+        confirmPasswordError.isHidden = turnOnAnOff
     }
     
     func layout(){
         
         stackView.addArrangedSubview(nameTextField)
+        stackView.addArrangedSubview(nameError)
         stackView.addArrangedSubview(emailTextField)
+        stackView.addArrangedSubview(emailError)
         stackView.addArrangedSubview(phoneNumberTextField)
+        stackView.addArrangedSubview(phoneError)
         stackView.addArrangedSubview(passwordTextField)
+        stackView.addArrangedSubview(passwordError)
         stackView.addArrangedSubview(passwordConfirmationTextField)
+        stackView.addArrangedSubview(confirmPasswordError)
         
         addSubview(stackView)
         
@@ -125,6 +163,6 @@ extension RegisterView: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        guard let name = nameTextField.text, le
     }
 }

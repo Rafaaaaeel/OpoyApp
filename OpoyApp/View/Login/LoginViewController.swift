@@ -11,28 +11,31 @@ protocol LoginViewControllerDelegate: AnyObject{
     func didLogin()
 }
 
+let errorColor: UIColor = .systemRed
+
 class LoginViewController: UIViewController {
     
-    let userImage = UIImageView()
-    let welcomeMessageLabel = UILabel()
-    let moveOnMessageLabel = UILabel()
-    let emailView = LoginView(imageName: "envelope", placeholder: "@email.com", text: "Email", isSecurity: false)
-    let passwordView = LoginView(imageName: "lock", placeholder: "Password", text: "", isSecurity: true)
-    let errorMessage = UILabel()
+    let loginLabelsStackView = UIStackView()
+    let loginUserImage = UIImageView()
+    let loginTitleLabel = UILabel()
+    let loginSubTitleLabel = UILabel()
+    let loginFieldsStackViews = UIStackView()
+    let loginEmailTextField = LoginView(imageName: "envelope", placeholder: "@email.com", text: "E-mail", isSecurity: false)
+    let loginPasswordTextField = LoginView(imageName: "lock", placeholder: "******", text: "Password", isSecurity: true)
+    let loginErrorMessageLabel = UILabel()
+    let loginButton = UIButton(type: .system)
     let forgotPasswordButton = UIButton(type: .system)
     let createAccoutLabel = UILabel()
     let createAccoutButton = UIButton(type: .system)
-    let loginButton = UIButton(type: .system)
-    
-    
+   
     weak var delegate: LoginViewControllerDelegate?
     
     var email: String?{
-        return emailView.textField.text
+        return loginEmailTextField.textField.text
     }
     
     var password: String?{
-        return passwordView.textField.text
+        return loginPasswordTextField.textField.text
     }
     
     override func viewDidLoad() {
@@ -50,27 +53,36 @@ extension LoginViewController{
         
         view.backgroundColor = .systemBackground
         
-        emailView.translatesAutoresizingMaskIntoConstraints = false
+        loginEmailTextField.translatesAutoresizingMaskIntoConstraints = false
+
+        loginFieldsStackViews.translatesAutoresizingMaskIntoConstraints = false
+        loginFieldsStackViews.axis = .vertical
+        loginFieldsStackViews.spacing = 8
         
-        welcomeMessageLabel.translatesAutoresizingMaskIntoConstraints = false
-        welcomeMessageLabel.textAlignment = .center
-        welcomeMessageLabel.font = UIFont.boldSystemFont(ofSize: 32)
-        welcomeMessageLabel.text = "Welcome Back"
+        loginLabelsStackView.translatesAutoresizingMaskIntoConstraints = false
+        loginLabelsStackView.axis = .vertical
+        loginLabelsStackView.spacing = 8
         
-        moveOnMessageLabel.translatesAutoresizingMaskIntoConstraints = false
-        moveOnMessageLabel.textAlignment = .center
-        moveOnMessageLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        moveOnMessageLabel.textColor = .systemGray
-        moveOnMessageLabel.text = "Sign to continue"
+        loginTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        loginTitleLabel.textAlignment = .center
+        loginTitleLabel.font = UIFont.boldSystemFont(ofSize: 32)
+        loginTitleLabel.text = "Welcome Back"
         
+        loginSubTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        loginSubTitleLabel.textAlignment = .center
+        loginSubTitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        loginSubTitleLabel.textColor = .systemGray
+        loginSubTitleLabel.text = "Sign to continue"
         
-        userImage.translatesAutoresizingMaskIntoConstraints = false
-        userImage.image = UIImage(named: "user-icon")
-        userImage.contentMode = .scaleAspectFit
+        loginUserImage.translatesAutoresizingMaskIntoConstraints = false
+        loginUserImage.image = UIImage(named: "user-icon")
+        loginUserImage.contentMode = .scaleAspectFit
         
-        errorMessage.translatesAutoresizingMaskIntoConstraints = false
-        errorMessage.textAlignment = .center
-        errorMessage.textColor = .systemRed
+        loginErrorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+        loginErrorMessageLabel.textAlignment = .center
+        loginErrorMessageLabel.textColor = .systemRed
+        loginErrorMessageLabel.text = ""
+        loginErrorMessageLabel.isHidden = true
         
         forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
         forgotPasswordButton.setTitle("Forgot Password?", for: [])
@@ -84,6 +96,7 @@ extension LoginViewController{
         loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .primaryActionTriggered)
         loginButton.configuration?.imagePadding = 8
         
+        
         createAccoutLabel.translatesAutoresizingMaskIntoConstraints = false
         createAccoutLabel.text = "Don't have account?"
         createAccoutLabel.textAlignment = .center
@@ -92,73 +105,53 @@ extension LoginViewController{
         createAccoutButton.setTitle("create a new account", for: [])
         createAccoutButton.tintColor = appColor
         createAccoutButton.addTarget(self, action: #selector(createNewAccountPressed), for: .primaryActionTriggered)
-        
-      
+    
     }
     
     private func layout(){
-        view.addSubview(userImage)
-        view.addSubview(welcomeMessageLabel)
-        view.addSubview(moveOnMessageLabel)
-        view.addSubview(emailView)
-        view.addSubview(passwordView)
-        view.addSubview(errorMessage)
+
+        loginLabelsStackView.addArrangedSubview(loginUserImage)
+        loginLabelsStackView.addArrangedSubview(loginTitleLabel)
+        loginLabelsStackView.addArrangedSubview(loginSubTitleLabel)
+    
+        loginFieldsStackViews.addArrangedSubview(loginEmailTextField)
+        loginFieldsStackViews.addArrangedSubview(loginPasswordTextField)
+        loginFieldsStackViews.addArrangedSubview(loginErrorMessageLabel)
+        
+        view.addSubview(loginLabelsStackView)
+        view.addSubview(loginFieldsStackViews)
         view.addSubview(forgotPasswordButton)
         view.addSubview(loginButton)
         view.addSubview(createAccoutLabel)
         view.addSubview(createAccoutButton)
         
         NSLayoutConstraint.activate([
-            userImage.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 5),
-            userImage.heightAnchor.constraint(equalToConstant: 130),
-            userImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            userImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            welcomeMessageLabel.topAnchor.constraint(equalToSystemSpacingBelow: userImage.bottomAnchor, multiplier: 1),
-            welcomeMessageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            welcomeMessageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            moveOnMessageLabel.topAnchor.constraint(equalToSystemSpacingBelow: welcomeMessageLabel.bottomAnchor, multiplier: 1),
-            moveOnMessageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            moveOnMessageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            
+            loginLabelsStackView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 11),
+            loginLabelsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: loginLabelsStackView.trailingAnchor),
         ])
         
         NSLayoutConstraint.activate([
-            emailView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            emailView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 4),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: emailView.trailingAnchor, multiplier: 4),
-            
-            passwordView.topAnchor.constraint(equalToSystemSpacingBelow: emailView.bottomAnchor, multiplier: 5),
-            passwordView.leadingAnchor.constraint(equalTo: emailView.leadingAnchor),
-            passwordView.trailingAnchor.constraint(equalTo: emailView.trailingAnchor)
+            loginFieldsStackViews.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loginFieldsStackViews.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 4),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: loginFieldsStackViews.trailingAnchor, multiplier: 4),
         ])
         
         NSLayoutConstraint.activate([
-            errorMessage.topAnchor.constraint(equalToSystemSpacingBelow: passwordView.bottomAnchor, multiplier: 1),
-            errorMessage.leadingAnchor.constraint(equalTo: passwordView.leadingAnchor),
-            errorMessage.trailingAnchor.constraint(equalTo: passwordView.trailingAnchor)
+            forgotPasswordButton.topAnchor.constraint(equalToSystemSpacingBelow: loginFieldsStackViews.bottomAnchor, multiplier: 1),
+            forgotPasswordButton.trailingAnchor.constraint(equalTo: loginFieldsStackViews.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            forgotPasswordButton.topAnchor.constraint(equalToSystemSpacingBelow: passwordView.bottomAnchor, multiplier: 3),
-            forgotPasswordButton.trailingAnchor.constraint(equalTo: passwordView.trailingAnchor)
-        
-        ])
-        
-        NSLayoutConstraint.activate([
-            loginButton.topAnchor.constraint(equalToSystemSpacingBelow: forgotPasswordButton.bottomAnchor, multiplier: 3),
-            loginButton.leadingAnchor.constraint(equalTo: passwordView.leadingAnchor),
-            loginButton.trailingAnchor.constraint(equalTo: passwordView.trailingAnchor),
+            loginButton.topAnchor.constraint(equalToSystemSpacingBelow: forgotPasswordButton.bottomAnchor, multiplier: 2),
+            loginButton.leadingAnchor.constraint(equalTo: loginPasswordTextField.leadingAnchor),
+            loginButton.trailingAnchor.constraint(equalTo: loginPasswordTextField.trailingAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50)
-        
         ])
         
         NSLayoutConstraint.activate([
             createAccoutLabel.topAnchor.constraint(equalToSystemSpacingBelow: loginButton.bottomAnchor, multiplier: 3),
             createAccoutLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: loginButton.leadingAnchor, multiplier: 1),
-            
-            
             createAccoutButton.topAnchor.constraint(equalToSystemSpacingBelow: loginButton.bottomAnchor, multiplier: 2.5),
             createAccoutButton.leadingAnchor.constraint(equalToSystemSpacingAfter: createAccoutLabel.trailingAnchor, multiplier: 1)
         ])
@@ -166,10 +159,8 @@ extension LoginViewController{
 }
 
 extension LoginViewController{
-    @objc func loginButtonPressed(_ sender: UIButton){
-        errorMessage.isHidden = true
-        login()
-    }
+    
+    
     
     @objc func createNewAccountPressed(_ sender: UIButton){
         navigationController?.pushViewController(RegisterViewController(), animated: true)
@@ -178,6 +169,12 @@ extension LoginViewController{
     @objc func forgotPasswordPressed(_ sender: UIButton){
         navigationController?.present(UINavigationController(rootViewController: ResetPasswordController()), animated: true, completion: nil)
     }
+    
+    @objc func loginButtonPressed(_ sender: UIButton){
+        errorReset()
+        login()
+    }
+    
     private func login(){
         loginVerification()
     }
@@ -185,12 +182,56 @@ extension LoginViewController{
     private func loginVerification(){
         guard let email = email, let password = password else { return }
 
-        print(email, password)
+        if email.isEmpty && password.isEmpty{
+            emailError()
+            passwordError()
+            return
+        }
+        
+        if email.isEmpty{
+            emailError("E-mail Cannot be blank")
+            return
+        }
+        
+        if password.isEmpty{
+            passwordError("Password Cannot be blank")
+            return
+        }
+        
+        if !email.isValidEmail{
+            emailError("E-mail format incorrect")
+            return
+        }
+         
+        loginButton.configuration?.showsActivityIndicator = true
         delegate?.didLogin()
+
+    }
+    
+    private func errorReset(){
+        loginEmailTextField.layer.borderWidth = 0
+        loginPasswordTextField.layer.borderWidth = 0
+        loginErrorMessageLabel.isHidden = true
+    }
+    
+    private func emailError(_ errorMessage: String = "E-mail / Password cannot be blank"){
+        errorMessageConfig(text: errorMessage)
+        loginEmailTextField.layer.borderWidth = 1
+    }
+    
+    private func passwordError(_ errorMessaage: String = "E-mail / Password cannot be blank"){
+        errorMessageConfig(text: errorMessaage)
+        loginPasswordTextField.layer.borderWidth = 1
+    }
+    
+    private func errorMessageConfig(text: String){
+        loginErrorMessageLabel.isHidden = false
+        loginErrorMessageLabel.text = text
         
     }
-    private func errorMessageConfig(text: String){
-        errorMessage.isHidden = false
-        errorMessage.text = text
-    }
 }
+
+
+
+
+

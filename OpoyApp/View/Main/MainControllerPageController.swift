@@ -11,7 +11,7 @@ import UIKit
 class MainControllerPageController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        print("into")
     }
 
 }
