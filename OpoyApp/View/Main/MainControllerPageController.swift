@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MainControllerPageController: UIViewController{
+class MainViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         print("into")

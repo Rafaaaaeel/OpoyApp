@@ -132,7 +132,7 @@ extension LoginViewController{
         ])
         
         NSLayoutConstraint.activate([
-            loginFieldsStackViews.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loginFieldsStackViews.topAnchor.constraint(equalToSystemSpacingBelow: loginLabelsStackView.bottomAnchor, multiplier: 4),
             loginFieldsStackViews.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 4),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: loginFieldsStackViews.trailingAnchor, multiplier: 4),
         ])
@@ -161,7 +161,6 @@ extension LoginViewController{
 extension LoginViewController{
     
     
-    
     @objc func createNewAccountPressed(_ sender: UIButton){
         navigationController?.pushViewController(RegisterViewController(), animated: true)
     }
@@ -179,7 +178,7 @@ extension LoginViewController{
         loginVerification()
     }
     
-    private func loginVerification(){
+    func loginVerification(){
         guard let email = email, let password = password else { return }
 
         if email.isEmpty && password.isEmpty{
@@ -208,27 +207,28 @@ extension LoginViewController{
 
     }
     
-    private func errorReset(){
+    public func errorReset(){
         loginEmailTextField.layer.borderWidth = 0
         loginPasswordTextField.layer.borderWidth = 0
         loginErrorMessageLabel.isHidden = true
     }
     
-    private func emailError(_ errorMessage: String = "E-mail / Password cannot be blank"){
+    public func emailError(_ errorMessage: String = "E-mail / Password cannot be blank"){
         errorMessageConfig(text: errorMessage)
         loginEmailTextField.layer.borderWidth = 1
     }
     
-    private func passwordError(_ errorMessaage: String = "E-mail / Password cannot be blank"){
+    func passwordError(_ errorMessaage: String = "E-mail / Password cannot be blank"){
         errorMessageConfig(text: errorMessaage)
         loginPasswordTextField.layer.borderWidth = 1
     }
     
-    private func errorMessageConfig(text: String){
+    public func errorMessageConfig(text: String){
         loginErrorMessageLabel.isHidden = false
         loginErrorMessageLabel.text = text
         
     }
+   
 }
 
 

@@ -20,7 +20,7 @@ class LoginView: UIView{
     let placeholder : String
     let text: String
     let isSec: Bool
-    var borderWidth: CGFloat = 0
+  
     
     init(imageName: String, placeholder: String, text: String, isSecurity: Bool){
         self.imageName = imageName
@@ -37,7 +37,6 @@ class LoginView: UIView{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }
 
@@ -71,7 +70,7 @@ extension LoginView{
         layer.cornerRadius = 15
         clipsToBounds = true
         
-        layer.borderWidth = borderWidth
+
         layer.borderColor = UIColor(red:255/255, green:1/255, blue:1/255, alpha: 0.6).cgColor
         
     }

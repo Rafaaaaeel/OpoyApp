@@ -18,6 +18,22 @@ class ResetPasswordController: UIViewController{
     let resetView = ResetPasswordView(placeholder: "Email", isSecurityCode: false, onlyKeyboard: false)
     let sendButton = UIButton(type: .system)
     
+    public var errorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = .systemRed
+        label.text = ""
+        label.isHidden = true
+        return label
+    }()
+    
+
+    
+    var email: String? {
+        return resetView.emailTextField.text
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
@@ -59,9 +75,11 @@ extension ResetPasswordController{
     
     private func layout(){
         stackView.addArrangedSubview(forgotPasswordTitle)
+        
         stackView.addArrangedSubview(forgotPasswordSbTitle)
         stackView.addArrangedSubview(resetView)
         stackView.addArrangedSubview(sendButton)
+        stackView.addArrangedSubview(errorLabel)
         
         view.addSubview(stackView)
         
@@ -75,7 +93,45 @@ extension ResetPasswordController{
 
 extension ResetPasswordController{
     @objc func continueButtonPressed(_ sender: UIButton){
+        sendEmail()
+    }
+    
+    func sendEmail(){
+        errorReset()
+        emailVerification()
+    }
+    
+    func emailVerification(){
+        guard let email = email else { return }
+        
+        if email.isEmpty{
+            emailError("E-mail cannot be blank")
+            return
+        }
+        
+        if !email.isValidEmail{
+            emailError("E-mail format incorrect ")
+            return
+        }
+        
         navigationController?.pushViewController(ValidationViewController(), animated: true)
+    }
+    
+    public func errorReset(){
+        resetView.layer.borderWidth = 0
+        errorLabel.isHidden = true
+    }
+    
+    public func emailError(_ errorMessage: String ){
+        errorMessageConfig(text: errorMessage)
+        resetView.layer.borderWidth = 1
+    }
+
+    
+    public func errorMessageConfig(text: String){
+        errorLabel.isHidden = false
+        errorLabel.text = text
+        
     }
 }
 
@@ -125,7 +181,6 @@ extension ValidationViewController{
         sendButton.configuration?.imagePadding = 8
         sendButton.addTarget(self, action: #selector(continueButtonPressed), for: .primaryActionTriggered)
         
-        
     }
     
     private func layout(){
@@ -154,12 +209,47 @@ extension ValidationViewController{
 
 class NewPasswordViewController: UIViewController{
     
+    
     let stackView = UIStackView()
     let resetPasswordTitle =  UILabel()
     let resetPasswordSubtitle = UILabel()
     let newPasswordTextField = ResetPasswordView(placeholder: "New Password", isSecurityCode: true, onlyKeyboard: false)
     let newPasswordTextFieldConfirmation = ResetPasswordView(placeholder: "Confirm new password", isSecurityCode: true, onlyKeyboard: false)
     let sendButton = UIButton(type: .system)
+    
+    var passwordRuleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemGray
+        label.font = UIFont.preferredFont(forTextStyle: .callout)
+        label.numberOfLines = 0
+        label.text = """
+        * Use at least 8 characters
+        * Use upper and lower case characters
+        * Use 1 or more numbers
+        * Use special characters
+        """
+
+        return label
+    }()
+    
+    var password: String? {
+        return newPasswordTextField.emailTextField.text
+    }
+    
+    var newPassword: String? {
+        return newPasswordTextFieldConfirmation.emailTextField.text
+    }
+    
+    public var errorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = .systemRed
+        label.text = ""
+        label.isHidden = true
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -197,15 +287,17 @@ extension NewPasswordViewController{
         sendButton.configuration?.imagePadding = 8
         sendButton.addTarget(self, action: #selector(continueButtonPressed), for: .primaryActionTriggered)
         
-        
     }
     
     private func layout(){
         stackView.addArrangedSubview(resetPasswordTitle)
         stackView.addArrangedSubview(resetPasswordSubtitle)
         stackView.addArrangedSubview(newPasswordTextField)
+        stackView.addArrangedSubview(passwordRuleLabel)
         stackView.addArrangedSubview(newPasswordTextFieldConfirmation)
+        stackView.addArrangedSubview(errorLabel)
         stackView.addArrangedSubview(sendButton)
+        
         
         view.addSubview(stackView)
         
@@ -219,6 +311,77 @@ extension NewPasswordViewController{
 
 extension NewPasswordViewController{
     @objc func continueButtonPressed(_ sender: UIButton){
+        resetPassword()
+    }
+    
+    func resetPassword(){
+        errorReset()
+        passwordsVerification()
+    }
+    
+    func passwordsVerification(){
+        guard let password = password, let newPassword = newPassword else { return }
+    
+        
+        
+        if password.isEmpty  && newPassword.isEmpty{
+            passwordAndConfirmationdifferent("New Password / New password confirmation cannot be blank")
+            return
+        }
+        
+        if password.isEmpty{
+            newPasswordError("New Password cannot be blank")
+            return
+        }
+        
+        if newPassword.isEmpty{
+            newPasswordErrorConfimation("New password confirmation cannot be blank")
+            return
+        }
+        
+        if password != newPassword{
+            passwordAndConfirmationdifferent("Password are differents")
+            return
+        }
+        
+
+        
+        if !password.isValidPassoword{
+            
+            
+            return
+        }
+        
         navigationController?.dismiss(animated: true)
+    }
+    
+    
+    private func errorReset(){
+        newPasswordTextField.layer.borderWidth = 0
+        newPasswordTextFieldConfirmation.layer.borderWidth = 0
+        errorLabel.isHidden = true
+    }
+    
+    private func passwordAndConfirmationdifferent(_ errorMessage: String){
+        errorMessageConfig(text: errorMessage)
+        newPasswordTextField.layer.borderWidth = 1
+        newPasswordTextFieldConfirmation.layer.borderWidth = 1
+    }
+    
+    private func newPasswordError(_ errorMessage: String ){
+        errorMessageConfig(text: errorMessage)
+        newPasswordTextField.layer.borderWidth = 1
+    }
+    
+    private func newPasswordErrorConfimation(_ errorMessage: String ){
+        errorMessageConfig(text: errorMessage)
+        newPasswordTextFieldConfirmation.layer.borderWidth = 1
+    }
+
+    
+    private func errorMessageConfig(text: String){
+        errorLabel.isHidden = false
+        errorLabel.text = text
+        
     }
 }

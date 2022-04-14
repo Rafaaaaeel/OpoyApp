@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let resetViewController = ResetPasswordController()
     let registerViewController = RegisterViewController()
     let loginViewController = LoginViewController()
-    let mainPageViewController = MainControllerPageController()
+    let mainPageViewController = MainViewController()
     let validationViewController =  ValidationViewController()
     
     let navigationController = UINavigationController(rootViewController: LoginViewController())
@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerViewController.delegate = self
         
         window?.rootViewController = navigationController
+//        window?.rootViewController = LoginViewController2()
         
         return true
     }
@@ -64,29 +65,4 @@ extension AppDelegate: RegisterViewControllerDelegate{
 }
 
 
-extension String {
-    var isValidEmail: Bool {
-        NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}").evaluate(with: self)
-    }
-    var isValidPassoword: Bool{
-        NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$").evaluate(with: self)
-    }
-    var isPasswodHasSpecialChar: Bool{
-        NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$").evaluate(with: self)
-    }
-    
-    var isPasswodHasUpperCase: Bool{
-        NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[A-Z])(?=.*?[0-9])$").evaluate(with: self)
-    }
-    
-    var isPasswodHaslowerCase: Bool{
-        NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[a-z])(?=.*?[0-9])$").evaluate(with: self)
-    }
-    
-    var isPasswodHasEightOrPlusChar: Bool{
-        NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$").evaluate(with: self)
-    }
-    
-    
-}
 

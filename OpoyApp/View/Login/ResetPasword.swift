@@ -47,11 +47,12 @@ extension ResetPasswordView{
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.placeholder = placeholder
         emailTextField.isSecureTextEntry = isSecurityCode
+        
         if onlyKeyboard{
             emailTextField.keyboardType = UIKeyboardType.numberPad
         }
         
-        
+        layer.borderColor = UIColor(red:255/255, green:1/255, blue:1/255, alpha: 0.6).cgColor
         layer.cornerRadius = 10
         clipsToBounds = true
     }
@@ -69,3 +70,4 @@ extension ResetPasswordView{
         ])
     }
 }
+
