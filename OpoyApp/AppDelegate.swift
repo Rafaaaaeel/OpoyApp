@@ -7,20 +7,18 @@
 
 import UIKit
 
-let appColor : UIColor = .systemGreen
+let appColor : UIColor = .systemBlue
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
     var window: UIWindow?
-    let resetViewController = ResetPasswordController()
+    
     let registerViewController = RegisterViewController()
     let loginViewController = LoginViewController()
     let mainPageViewController = MainViewController()
-    let validationViewController =  ValidationViewController()
+    let navigationController = UINavigationController(rootViewController: MainViewController())
     
-    let navigationController = UINavigationController(rootViewController: LoginViewController())
     func application(_ application: UIApplication, didFinishLaunchingWithOptions lauchoptions: [UIApplication.LaunchOptionsKey : Any]?) -> Bool{
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -31,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerViewController.delegate = self
         
         window?.rootViewController = navigationController
-//        window?.rootViewController = LoginViewController2()
+//        window?.rootViewController = registerViewController
         
         return true
     }

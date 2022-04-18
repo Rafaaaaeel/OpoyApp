@@ -16,7 +16,7 @@ let errorColor: UIColor = .systemRed
 class LoginViewController: UIViewController {
     
     let loginLabelsStackView = UIStackView()
-    let loginUserImage = UIImageView()
+    
     let loginTitleLabel = UILabel()
     let loginSubTitleLabel = UILabel()
     let loginFieldsStackViews = UIStackView()
@@ -41,14 +41,18 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        style()
-        layout()
+        setup()
     }
 
 }
 
 
 extension LoginViewController{
+    
+    private func setup(){
+        style()
+        layout()
+    }
     private func style(){
         
         view.backgroundColor = .systemBackground
@@ -57,7 +61,7 @@ extension LoginViewController{
 
         loginFieldsStackViews.translatesAutoresizingMaskIntoConstraints = false
         loginFieldsStackViews.axis = .vertical
-        loginFieldsStackViews.spacing = 8
+        loginFieldsStackViews.spacing = 30
         
         loginLabelsStackView.translatesAutoresizingMaskIntoConstraints = false
         loginLabelsStackView.axis = .vertical
@@ -74,10 +78,6 @@ extension LoginViewController{
         loginSubTitleLabel.textColor = .systemGray
         loginSubTitleLabel.text = "Sign to continue"
         
-        loginUserImage.translatesAutoresizingMaskIntoConstraints = false
-        loginUserImage.image = UIImage(named: "user-icon")
-        loginUserImage.contentMode = .scaleAspectFit
-        
         loginErrorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         loginErrorMessageLabel.textAlignment = .center
         loginErrorMessageLabel.textColor = .systemRed
@@ -92,17 +92,16 @@ extension LoginViewController{
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.tintColor = appColor
         loginButton.configuration = .filled()
-        loginButton.setTitle("LOGIN", for: [])
+        loginButton.setTitle("Sign In", for: [])
         loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .primaryActionTriggered)
         loginButton.configuration?.imagePadding = 8
-        
-        
+
         createAccoutLabel.translatesAutoresizingMaskIntoConstraints = false
         createAccoutLabel.text = "Don't have account?"
         createAccoutLabel.textAlignment = .center
         
         createAccoutButton.translatesAutoresizingMaskIntoConstraints = false
-        createAccoutButton.setTitle("create a new account", for: [])
+        createAccoutButton.setTitle("Sign up", for: [])
         createAccoutButton.tintColor = appColor
         createAccoutButton.addTarget(self, action: #selector(createNewAccountPressed), for: .primaryActionTriggered)
     
@@ -110,7 +109,7 @@ extension LoginViewController{
     
     private func layout(){
 
-        loginLabelsStackView.addArrangedSubview(loginUserImage)
+        
         loginLabelsStackView.addArrangedSubview(loginTitleLabel)
         loginLabelsStackView.addArrangedSubview(loginSubTitleLabel)
     
@@ -126,7 +125,7 @@ extension LoginViewController{
         view.addSubview(createAccoutButton)
         
         NSLayoutConstraint.activate([
-            loginLabelsStackView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 11),
+            loginLabelsStackView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 16),
             loginLabelsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: loginLabelsStackView.trailingAnchor),
         ])
@@ -150,9 +149,9 @@ extension LoginViewController{
         ])
         
         NSLayoutConstraint.activate([
-            createAccoutLabel.topAnchor.constraint(equalToSystemSpacingBelow: loginButton.bottomAnchor, multiplier: 3),
-            createAccoutLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: loginButton.leadingAnchor, multiplier: 1),
-            createAccoutButton.topAnchor.constraint(equalToSystemSpacingBelow: loginButton.bottomAnchor, multiplier: 2.5),
+            createAccoutLabel.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: -4),
+            createAccoutLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: loginButton.leadingAnchor, multiplier: 6),
+            createAccoutButton.centerYAnchor.constraint(equalTo: createAccoutLabel.centerYAnchor),
             createAccoutButton.leadingAnchor.constraint(equalToSystemSpacingAfter: createAccoutLabel.trailingAnchor, multiplier: 1)
         ])
     }
@@ -229,6 +228,12 @@ extension LoginViewController{
         
     }
    
+}
+extension LoginViewController{
+        
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 

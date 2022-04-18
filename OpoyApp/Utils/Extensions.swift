@@ -15,21 +15,10 @@ extension String {
     var isValidPassoword: Bool{
         NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$").evaluate(with: self)
     }
-    var isPasswodHasSpecialChar: Bool{
-        NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$").evaluate(with: self)
-    }
     
-    var isPasswodHasUpperCase: Bool{
-        NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[A-Z])(?=.*?[0-9])$").evaluate(with: self)
+    var lenghIsRight: Bool{
+        NSPredicate(format: "SELF MATCHES %@", "^[^-\\s][\\p{L}\\-'\\s]{2,26}$").evaluate(with: self)
     }
-    
-    var isPasswodHaslowerCase: Bool{
-        NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[a-z])(?=.*?[0-9])$").evaluate(with: self)
-    }
-    
-    var isPasswodHasEightOrPlusChar: Bool{
-        NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$").evaluate(with: self)
-    }
-    
+
     
 }

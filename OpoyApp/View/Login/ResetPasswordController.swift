@@ -18,6 +18,17 @@ class ResetPasswordController: UIViewController{
     let resetView = ResetPasswordView(placeholder: "Email", isSecurityCode: false, onlyKeyboard: false)
     let sendButton = UIButton(type: .system)
     
+    public var forgotImage: UIImageView = {
+       let image = UIImageView()
+        let imageName = UIImage(named: "fgt-password")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.image = imageName
+        image.frame = CGRect(x: 30, y: 30, width: 200, height: 30)
+        image.setContentHuggingPriority(.defaultLow, for: .vertical)
+        return image
+    }()
+    
     public var errorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +61,7 @@ extension ResetPasswordController{
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 20
         stackView.axis = .vertical
+        stackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         forgotPasswordTitle.translatesAutoresizingMaskIntoConstraints = false
         forgotPasswordTitle.textAlignment = .center
@@ -74,6 +86,7 @@ extension ResetPasswordController{
     }
     
     private func layout(){
+        
         stackView.addArrangedSubview(forgotPasswordTitle)
         
         stackView.addArrangedSubview(forgotPasswordSbTitle)
@@ -81,10 +94,16 @@ extension ResetPasswordController{
         stackView.addArrangedSubview(sendButton)
         stackView.addArrangedSubview(errorLabel)
         
+        view.addSubview(forgotImage)
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            forgotImage.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 1),
+            forgotImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            forgotImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            forgotImage.heightAnchor.constraint(equalToConstant: 240),
+            
+            stackView.topAnchor.constraint(equalToSystemSpacingBelow: forgotImage.bottomAnchor, multiplier: 2),
             stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 4),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 4)
         ])
@@ -92,6 +111,10 @@ extension ResetPasswordController{
 }
 
 extension ResetPasswordController{
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @objc func continueButtonPressed(_ sender: UIButton){
         sendEmail()
     }
@@ -200,6 +223,10 @@ extension ValidationViewController{
 }
 
 extension ValidationViewController{
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @objc func continueButtonPressed(_ sender: UIButton){
         navigationController?.pushViewController(NewPasswordViewController(), animated: true)
     }
@@ -248,6 +275,7 @@ class NewPasswordViewController: UIViewController{
         label.textColor = .systemRed
         label.text = ""
         label.isHidden = true
+        label.numberOfLines = 0
         return label
     }()
     
@@ -293,8 +321,9 @@ extension NewPasswordViewController{
         stackView.addArrangedSubview(resetPasswordTitle)
         stackView.addArrangedSubview(resetPasswordSubtitle)
         stackView.addArrangedSubview(newPasswordTextField)
-        stackView.addArrangedSubview(passwordRuleLabel)
+        
         stackView.addArrangedSubview(newPasswordTextFieldConfirmation)
+        stackView.addArrangedSubview(passwordRuleLabel)
         stackView.addArrangedSubview(errorLabel)
         stackView.addArrangedSubview(sendButton)
         
@@ -310,6 +339,10 @@ extension NewPasswordViewController{
 }
 
 extension NewPasswordViewController{
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @objc func continueButtonPressed(_ sender: UIButton){
         resetPassword()
     }
@@ -347,8 +380,7 @@ extension NewPasswordViewController{
 
         
         if !password.isValidPassoword{
-            
-            
+            passwordRuleLabel.textColor = .systemRed
             return
         }
         
@@ -358,6 +390,7 @@ extension NewPasswordViewController{
     
     private func errorReset(){
         newPasswordTextField.layer.borderWidth = 0
+        passwordRuleLabel.textColor = .systemGray
         newPasswordTextFieldConfirmation.layer.borderWidth = 0
         errorLabel.isHidden = true
     }
