@@ -11,6 +11,9 @@
 		270A390F280581BF00A88E51 /* ResetPasword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270A390E280581BF00A88E51 /* ResetPasword.swift */; };
 		27489335280779D90030FF84 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27489334280779D90030FF84 /* Extensions.swift */; };
 		274893422808D3FC0030FF84 /* ViewControllerFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274893412808D3FC0030FF84 /* ViewControllerFunctions.swift */; };
+		275076B2280D62F000F4A493 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 275076B1280D62F000F4A493 /* GoogleService-Info.plist */; };
+		275076B4280D751A00F4A493 /* LoggedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275076B3280D751A00F4A493 /* LoggedViewController.swift */; };
+		275076B6280DBEA100F4A493 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275076B5280DBEA100F4A493 /* Service.swift */; };
 		277EC63927DF6D6400638066 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EC63827DF6D6400638066 /* AppDelegate.swift */; };
 		277EC63D27DF6D6400638066 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EC63C27DF6D6400638066 /* LoginViewController.swift */; };
 		277EC64227DF6D6500638066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 277EC64127DF6D6500638066 /* Assets.xcassets */; };
@@ -18,13 +21,18 @@
 		277EC64F27DF736000638066 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277EC64E27DF736000638066 /* LoginView.swift */; };
 		2781C2D127E9D16300386DF4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781C2D027E9D16300386DF4 /* RegisterViewController.swift */; };
 		27BE30D92804CA540059973E /* MainControllerPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BE30D82804CA540059973E /* MainControllerPageController.swift */; };
+		728FC5700AFCBDE92CF6C19D /* Pods_OpoyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4752A1D291ACFC61E04A663 /* Pods_OpoyApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		140019415893E441020659C1 /* Pods-OpoyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpoyApp.debug.xcconfig"; path = "Target Support Files/Pods-OpoyApp/Pods-OpoyApp.debug.xcconfig"; sourceTree = "<group>"; };
 		270A390C2805817100A88E51 /* ResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
 		270A390E280581BF00A88E51 /* ResetPasword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasword.swift; sourceTree = "<group>"; };
 		27489334280779D90030FF84 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		274893412808D3FC0030FF84 /* ViewControllerFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFunctions.swift; sourceTree = "<group>"; };
+		275076B1280D62F000F4A493 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		275076B3280D751A00F4A493 /* LoggedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedViewController.swift; sourceTree = "<group>"; };
+		275076B5280DBEA100F4A493 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		277EC63527DF6D6400638066 /* OpoyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpoyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		277EC63827DF6D6400638066 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		277EC63C27DF6D6400638066 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +42,8 @@
 		277EC64E27DF736000638066 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2781C2D027E9D16300386DF4 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		27BE30D82804CA540059973E /* MainControllerPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllerPageController.swift; sourceTree = "<group>"; };
+		A27D7664AF0D0684192AC35B /* Pods-OpoyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpoyApp.release.xcconfig"; path = "Target Support Files/Pods-OpoyApp/Pods-OpoyApp.release.xcconfig"; sourceTree = "<group>"; };
+		F4752A1D291ACFC61E04A663 /* Pods_OpoyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpoyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				728FC5700AFCBDE92CF6C19D /* Pods_OpoyApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +73,7 @@
 			children = (
 				27489334280779D90030FF84 /* Extensions.swift */,
 				274893412808D3FC0030FF84 /* ViewControllerFunctions.swift */,
+				275076B5280DBEA100F4A493 /* Service.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -71,6 +83,8 @@
 			children = (
 				277EC63727DF6D6400638066 /* OpoyApp */,
 				277EC63627DF6D6400638066 /* Products */,
+				643A9F324A1FA282AFD4B494 /* Pods */,
+				78DFD5EF159DB319ECB6FD59 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +110,7 @@
 		277EC64C27DF6D7400638066 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				275076B1280D62F000F4A493 /* GoogleService-Info.plist */,
 				277EC64127DF6D6500638066 /* Assets.xcassets */,
 				277EC64327DF6D6500638066 /* LaunchScreen.storyboard */,
 				277EC64627DF6D6500638066 /* Info.plist */,
@@ -126,8 +141,26 @@
 			isa = PBXGroup;
 			children = (
 				27BE30D82804CA540059973E /* MainControllerPageController.swift */,
+				275076B3280D751A00F4A493 /* LoggedViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		643A9F324A1FA282AFD4B494 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				140019415893E441020659C1 /* Pods-OpoyApp.debug.xcconfig */,
+				A27D7664AF0D0684192AC35B /* Pods-OpoyApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		78DFD5EF159DB319ECB6FD59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4752A1D291ACFC61E04A663 /* Pods_OpoyApp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 277EC64927DF6D6500638066 /* Build configuration list for PBXNativeTarget "OpoyApp" */;
 			buildPhases = (
+				B160236DCAC42930C8A9C363 /* [CP] Check Pods Manifest.lock */,
 				277EC63127DF6D6400638066 /* Sources */,
 				277EC63227DF6D6400638066 /* Frameworks */,
 				277EC63327DF6D6400638066 /* Resources */,
+				A750CB7F52DC8DB46ED64A0D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -190,10 +225,53 @@
 			files = (
 				277EC64527DF6D6500638066 /* LaunchScreen.storyboard in Resources */,
 				277EC64227DF6D6500638066 /* Assets.xcassets in Resources */,
+				275076B2280D62F000F4A493 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A750CB7F52DC8DB46ED64A0D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpoyApp/Pods-OpoyApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OpoyApp/Pods-OpoyApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OpoyApp/Pods-OpoyApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B160236DCAC42930C8A9C363 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OpoyApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		277EC63127DF6D6400638066 /* Sources */ = {
@@ -202,11 +280,13 @@
 			files = (
 				277EC64F27DF736000638066 /* LoginView.swift in Sources */,
 				274893422808D3FC0030FF84 /* ViewControllerFunctions.swift in Sources */,
+				275076B4280D751A00F4A493 /* LoggedViewController.swift in Sources */,
 				2781C2D127E9D16300386DF4 /* RegisterViewController.swift in Sources */,
 				27BE30D92804CA540059973E /* MainControllerPageController.swift in Sources */,
 				270A390F280581BF00A88E51 /* ResetPasword.swift in Sources */,
 				27489335280779D90030FF84 /* Extensions.swift in Sources */,
 				270A390D2805817100A88E51 /* ResetPasswordController.swift in Sources */,
+				275076B6280DBEA100F4A493 /* Service.swift in Sources */,
 				277EC63D27DF6D6400638066 /* LoginViewController.swift in Sources */,
 				277EC63927DF6D6400638066 /* AppDelegate.swift in Sources */,
 			);
@@ -344,6 +424,7 @@
 		};
 		277EC64A27DF6D6500638066 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 140019415893E441020659C1 /* Pods-OpoyApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -363,7 +444,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.opyApp.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.opoyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -374,6 +455,7 @@
 		};
 		277EC64B27DF6D6500638066 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A27D7664AF0D0684192AC35B /* Pods-OpoyApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -393,7 +475,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.opyApp.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.opoyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

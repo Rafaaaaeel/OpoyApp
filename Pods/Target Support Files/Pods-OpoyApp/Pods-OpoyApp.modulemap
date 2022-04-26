@@ -1,0 +1,6 @@
+framework module Pods_OpoyApp {
+  umbrella header "Pods-OpoyApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

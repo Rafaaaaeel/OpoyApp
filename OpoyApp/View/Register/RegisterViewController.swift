@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 protocol RegisterViewControllerDelegate: AnyObject{
     func didCreateAccount()
@@ -64,6 +66,7 @@ class RegisterViewController: UIViewController{
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Email"
+        textField.autocapitalizationType = .none
         
         let imageEmailTextField = UIImageView()
         imageEmailTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -267,7 +270,7 @@ extension RegisterViewController: ViewControllerFunctions{
         ])
         
         NSLayoutConstraint.activate([
-            alreadyLabel.topAnchor.constraint(equalToSystemSpacingBelow: stackView.bottomAnchor, multiplier: 19),
+            alreadyLabel.topAnchor.constraint(equalToSystemSpacingBelow: stackView.bottomAnchor, multiplier: 23),
             alreadyLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: stackView.leadingAnchor, multiplier: 5),
             
             returnToLogin.leadingAnchor.constraint(equalToSystemSpacingAfter: alreadyLabel.trailingAnchor, multiplier: 1),
@@ -328,7 +331,34 @@ extension RegisterViewController{
     }
     
     @objc func createNewAccount(_ sender: UIButton){
-        delegate?.didCreateAccount()
+        createAccount()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func createAccount(){
+        guard let name = name.text, let email = email.text, let password = password.text else { return }
+        
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { (result, error) in
+            
+            guard error == nil else {
+                print("Sorry something went wrong")
+                return
+            }
+            
+            let db = Firestore.firestore()
+            
+            db.collection("users").addDocument(data: [
+                "name":name,
+                "email":email,
+                "uid": result!.user.uid
+            ]) { Error in
+                if Error != nil{
+                    print(Error?.localizedDescription)
+                }
+            }
+
+            
+        })
     }
     
 }

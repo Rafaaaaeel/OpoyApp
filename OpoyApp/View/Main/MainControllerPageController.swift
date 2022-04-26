@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class MainViewController: UIViewController{
     
@@ -62,15 +63,39 @@ class MainViewController: UIViewController{
         return label
     }()
     
+    public var welcomeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Welcome to your app which is where nothing happens because we don't have a app screen"
+        label.textAlignment = .center
+        return label
+    }()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            appDelegate?.window?.rootViewController = LoggedViewController()
+            appDelegate?.window?.makeKeyAndVisible()
+    }
 
 }
 
 extension MainViewController: ViewControllerFunctions{
+    
+    func refreash(){
+        
+    }
+    
     func setupHierarchy() {
         
         view.addSubview(mainImage)
@@ -104,12 +129,12 @@ extension MainViewController: ViewControllerFunctions{
     func aditionalSetup() {
         view.backgroundColor = appColor
     }
-    
-    
 }
 
 
 extension MainViewController{
+
+    
     @objc func signInPressed(_ sender: UIButton){
         navigationController?.pushViewController(LoginViewController(), animated: true)
     }

@@ -82,6 +82,8 @@ extension LoginView{
         textField.placeholder = placeholder
         textField.isSecureTextEntry = isSec
         textField.leftView = image
+        textField.autocapitalizationType = .none
+        textField.keyboardType = .emailAddress
         textField.leftViewMode = .always
         //textField.textColor = appColor
         textField.textAlignment = .left

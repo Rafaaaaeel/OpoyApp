@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 let appColor : UIColor = .systemBlue
 
@@ -18,17 +20,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let loginViewController = LoginViewController()
     let mainPageViewController = MainViewController()
     let navigationController = UINavigationController(rootViewController: MainViewController())
+    let loggedViewController = LoggedViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions lauchoptions: [UIApplication.LaunchOptionsKey : Any]?) -> Bool{
+
+        FirebaseApp.configure()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
 
-        loginViewController.delegate = self
+
         registerViewController.delegate = self
+        loggedViewController.delegate = self
+        loginViewController.delegate = self
+
         
         window?.rootViewController = navigationController
+        
+        let user = Auth.auth().currentUser?.email
+        print("Foo - \(user)")
 //        window?.rootViewController = registerViewController
         
         return true
@@ -37,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-extension AppDelegate: LoginViewControllerDelegate{
+extension AppDelegate{
     
     func setRootViewController(_ vc: UIViewController, animeted: Bool = true){
         guard animeted, let window = self.window else{
@@ -50,10 +61,6 @@ extension AppDelegate: LoginViewControllerDelegate{
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
     
-    func didLogin() {
-        setRootViewController(mainPageViewController)
-    }
-    
 }
 
 extension AppDelegate: RegisterViewControllerDelegate{
@@ -62,5 +69,17 @@ extension AppDelegate: RegisterViewControllerDelegate{
     }
 }
 
+extension AppDelegate: LoggedViewControllerDelegate{
+    func didLogOut() {
+       setRootViewController(navigationController)
+    }
+}
 
-
+extension AppDelegate: LoginViewControllerDelegate{
+    func didLogin() {
+        
+        if Auth.auth().currentUser != nil {
+            setRootViewController(loggedViewController)
+        }
+    }
+}

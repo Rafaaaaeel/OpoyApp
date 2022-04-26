@@ -6,12 +6,13 @@
 //
 
 import UIKit
-
-protocol LoginViewControllerDelegate: AnyObject{    
-    func didLogin()
-}
+import FirebaseAuth
 
 let errorColor: UIColor = .systemRed
+
+protocol LoginViewControllerDelegate: AnyObject{
+    func didLogin()
+}
 
 class LoginViewController: UIViewController {
     
@@ -54,6 +55,7 @@ extension LoginViewController{
         layout()
     }
     private func style(){
+        
         
         view.backgroundColor = .systemBackground
         
@@ -171,6 +173,7 @@ extension LoginViewController{
     @objc func loginButtonPressed(_ sender: UIButton){
         errorReset()
         login()
+        delegate?.didLogin()
     }
     
     private func login(){
@@ -179,7 +182,7 @@ extension LoginViewController{
     
     func loginVerification(){
         guard let email = email, let password = password else { return }
-
+        
         if email.isEmpty && password.isEmpty{
             emailError()
             passwordError()
@@ -200,11 +203,22 @@ extension LoginViewController{
             emailError("E-mail format incorrect")
             return
         }
-         
-        loginButton.configuration?.showsActivityIndicator = true
-        delegate?.didLogin()
-
+        
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
+            
+            guard let strongSelf = self else{
+                return
+            }
+            
+            guard error == nil else {
+                strongSelf.errorMessageConfig(text: "E-mail or Password Invalid")
+                return
+            }
+            
+            strongSelf.loginButton.configuration?.showsActivityIndicator = true
+        })
     }
+
     
     public func errorReset(){
         loginEmailTextField.layer.borderWidth = 0

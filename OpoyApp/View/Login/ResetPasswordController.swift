@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-
+import Firebase
+import FirebaseAuth
 
 // MARK: Reset
 class ResetPasswordController: UIViewController{
@@ -135,6 +136,19 @@ extension ResetPasswordController{
         if !email.isValidEmail{
             emailError("E-mail format incorrect ")
             return
+        }
+        
+        let auth = Auth.auth()
+        
+        auth.sendPasswordReset(withEmail: email) { (error) in
+            if let error = error{
+                let alert = Service.createAlertController(title: "Error", message: error.localizedDescription)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            let alert = Service.createAlertController(title: "Opoy", message: "A password reset email has been sent")
+            self.present(alert, animated: true, completion: nil)
         }
         
         navigationController?.pushViewController(ValidationViewController(), animated: true)
